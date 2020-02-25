@@ -21,6 +21,7 @@ public class GetData {
 	static ArrayList<CarDetails> a=new ArrayList<CarDetails>();
 	static TreeMap<Integer,String> t=new TreeMap<Integer,String>();
 	static ArrayList<Integer> s=new ArrayList<Integer>();
+	
 public static ArrayList<CarDetails> getCarDetails(){
 	try {
 	
@@ -29,14 +30,8 @@ public static ArrayList<CarDetails> getCarDetails(){
 		 st=con.createStatement();
 		 rs=st.executeQuery("select * from CarData");
 		 while(rs.next()){
-			 CarDetails c=new CarDetails();
-			 c.setRegNumber(rs.getString(1));
-			 c.setColor(rs.getString(2));
-			 c.setInTime(rs.getString(3));
-			 c.setOutTime(rs.getString(4));
-			 c.setStatus(rs.getString(5));
-			 c.setSlot(rs.getInt(5));
-		a.add(c);
+			 CarDetails c=new CarDetails(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(6),rs.getString(5));
+			 a.add(c);
 	
 		 }	
 		 con.close();
@@ -44,7 +39,7 @@ public static ArrayList<CarDetails> getCarDetails(){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
+
 	return a;
 	
 }

@@ -14,16 +14,16 @@ import com.data.file.GetData;
 import com.user.classs.CarDetails;
 
 /**
- * Servlet implementation class BySlot
+ * Servlet implementation class AllData
  */
-@WebServlet("/BySlot")
-public class BySlot extends HttpServlet {
+@WebServlet("/AllData")
+public class AllData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BySlot() {
+    public AllData() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class BySlot extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -42,27 +42,22 @@ public class BySlot extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
-		ArrayList<CarDetails> al=GetData.getCarDetails();
+		ArrayList<CarDetails> c=GetData.getCarDetails();
 		PrintWriter pw = response.getWriter();
 		PrintWriter pw1 = response.getWriter();
-		String s=request.getParameter("slot");
-		int sol=Integer.parseInt(s);
-		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Car Details For Slot Number "+s+""
-				+ " </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
-		boolean flag=false;
-		for(CarDetails c:al)
+	
+	
+		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Car Details "+ " </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
+		
+		for(int i=0;i<c.size();i++)
 		{
-			if(c.slot==sol){
-		flag=true;
-		pw1.write("<tr><td>"+c.regNumber+"</td><td>"+c.color+"</td><td>"+c.slot+"</td></tr>");
-			}
+		
+		pw1.write("<tr><td>"+c.get(i).regNumber+"</td><td>"+c.get(i).color+"</td><td>"+c.get(i).slot+"</td></tr>");
+			
 			
 			}
 		pw.write("</table>");
-		if(flag==false){
-			pw.write("<h4 style='text-align:center'>NO RECORD FOUND</h4>");
-		}
+	
 	}
 
 }
