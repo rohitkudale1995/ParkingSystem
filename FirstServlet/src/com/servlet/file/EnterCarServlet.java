@@ -12,45 +12,49 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.connection.file.ConnectionClass;
 import com.data.file.GetData;
+import com.operation.classs.Operation;
 
-/**
- * Servlet implementation class EnterCarServlet
- */
 @WebServlet("/EnterCarServlet")
 public class EnterCarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EnterCarServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	public EnterCarServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-PrintWriter pw=response.getWriter();
-String s=request.getParameter("color1");
-String s1=request.getParameter("number");
-pw.write( "<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Entery Car Details</h3> <div><label for='number'>Registration Numbers:-</label>&nbsp;"
-		+ "<input type='text' id='number'value='"+s1+"' disabled></div>"
-				+ " <br><div> <label>Car Colour:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<input type='text' id='number'value='"+s+"' disabled></div><br><div> <label>Parking Slot:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-						+ "<input type='text' id='number'value='1' disabled></div><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>"+GetData.get());
-	
+		// response.getWriter().append("Served at:
+		// ").append(request.getContextPath());
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		PrintWriter pw = response.getWriter();
+		String s = request.getParameter("color1");
+		String s1 = request.getParameter("number");
+		Operation o=new Operation();
+		int slott=o.Number();
+		pw.write(
+				"<h1 style='text-align:center'>Parking System</h1><div  align='center' >"
+				+ "<h3>Entery Car Details</h3> <div><label for='number'>Registration Numbers:-</label>&nbsp;"
+						+ "<input type='text' id='number'value='" + s1 + "' disabled></div>"
+						+ " <br><div> <label>Car Colour:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						+ "<input type='text' id='number'value='" + s
+						+ "' disabled></div><br><div> <label>Parking Slot:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						+ "<input type='text' id='number'value='"+slott+"' disabled></div><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
+
 	}
 
 }

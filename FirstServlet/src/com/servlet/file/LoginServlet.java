@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
-     * Default constructor. 
+  nstructor. 
      */
     public LoginServlet() {
         // TODO Auto-generated constructor stub
@@ -46,9 +46,7 @@ public class LoginServlet extends HttpServlet {
 		//doGet(request, response);
 		
 		
-        PrintWriter pw=response.getWriter();
-		
-		pw.write("Welcome IN POST");
+      
 		
 	}
 
