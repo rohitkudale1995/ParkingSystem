@@ -1,56 +1,112 @@
 package com.operation.classs;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import com.connection.file.ConnectionClass;
 import com.data.file.GetData;
 import com.user.classs.CarDetails;
 
 public class Operation {
-	
+	static Connection con=null;
+	static ResultSet rs=null;
+	static PreparedStatement st=null;
 	static ArrayList<CarDetails> a;
 	
 	static TreeMap<Integer,String> t;
 	static int result=0;
 
 	
-	public  int Number(){
-		
-		 ArrayList<Integer> it=GetData.getSlot();
-		System.out.println(it);
-
-		if(it.size()==0){
-			result=1;
-		}else
-			if(it.get(0)==1 && it.get(1)!=2){
+	public static  int Number(){
+		try {
 			
-				result=2;
-			}else{
-		
-					for(int i=0;i<it.size()-1;i++){
-						if(it.get(i+1)-it.get(i)!=1){
-							result=it.size()+1;
-				
-						}else{
-							result=it.get(i+1)+1;
-							break;
-						}
-					}
-				}
-		it.removeAll(it);
-		return result;
-	}
-	public static int insert(String number,String color){
-		return result;
-	
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+			 con=ConnectionClass.connetionObj().connect();
+			 st=con.prepareStatement("select min(sno) as no from Slot where place='NO'");
+			 rs=st.executeQuery();
+	
+			 while(rs.next()){
+				result=rs.getInt("no");
+			
+			 }	
+		
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return result;
 	}
+	
+	public static int insert(String number,String color){
+		int num=Number();
+		try{
+		if(num==0)
+			{
+			   con=null;
+				  rs=null;
+			  st=null;
+			 con=ConnectionClass.connetionObj().connect();
+			 st=con.prepareStatement("select max(sno) as no from Slot where place='Yes'");
+			 rs=st.executeQuery();
+	
+			 while(rs.next()){
+				num=rs.getInt("no");
+			
+			 }
+			 result=num+1;
+			  con=null;
+			  rs=null;
+		  st=null;
+		  con=ConnectionClass.connetionObj().connect();
+			 st=con.prepareStatement("insert into slot values(?,?)");
+			st.setInt(1, result);
+			st.setString(2, "Yes");
+			st.executeUpdate();
+			}else{
+				  con=null;
+				  rs=null;
+			  st=null;
+			  con=ConnectionClass.connetionObj().connect();
+				 st=con.prepareStatement("update  slot set Place='Yes' where sno=?");
+				st.setInt(1, result);
+				st.executeUpdate();
+			}
+	
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		String temp=dtf.format(now);
+		  con=null;
+		  rs=null;
+	  st=null;
+	  con=ConnectionClass.connetionObj().connect();
+		 st=con.prepareStatement("insert into CarData values(?,?,?,?,?,?)");
+		 st.setString(1, number);
+		 st.setString(2, color);
+		 st.setString(3, temp);
+		 st.setString(4, "-");
+		 st.setString(5, "IN");
+		 st.setInt(6, result);
+		 st.executeUpdate();
+		 con.close();  
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+	
+	}
+		
+		return result;
+	
+	}
+
 
 }

@@ -24,6 +24,9 @@ public class ConnectionClass {
 			// TODO Auto-generated catch block
 			System.out.print(" Not Connect "+e);
 		}
+		 finally{
+				
+			}
 		return con;
 	}
 }

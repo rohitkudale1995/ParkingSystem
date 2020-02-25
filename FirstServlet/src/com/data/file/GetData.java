@@ -39,6 +39,7 @@ public static ArrayList<CarDetails> getCarDetails(){
 		a.add(c);
 	
 		 }	
+		 con.close();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

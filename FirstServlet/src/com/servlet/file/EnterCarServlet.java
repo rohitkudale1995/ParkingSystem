@@ -44,8 +44,7 @@ public class EnterCarServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String s = request.getParameter("color1");
 		String s1 = request.getParameter("number");
-		Operation o=new Operation();
-		int slott=o.Number();
+	int slott=Operation.insert(s1, s);
 		pw.write(
 				"<h1 style='text-align:center'>Parking System</h1><div  align='center' >"
 				+ "<h3>Entery Car Details</h3> <div><label for='number'>Registration Numbers:-</label>&nbsp;"
