@@ -1,0 +1,101 @@
+/**************************************	Parking System Project**************************************/
+			                        	Information About Class And Package
+1.Java Resources Package
+A.Com.connection.file Package
+class Name 1-ConnectionClass
+	This Class is Use For The JDBC Connection.
+	This Class Method is 
+	a.connetionObj()-This Method Is Use To Connection.
+/********************************************************************************/
+B.Com.data.file Package
+Interface Name-Data
+	This Class Method Are
+	a.getCarDetails()
+	b.getSlotDetails()
+
+class Name 1-CarData
+	This Class is Use Get The Car Data From Database And Data Store In Collection.
+	This Class Method Are
+	a.getCarDetails()-This Method Is Use To Get Data From ResultSet And Store IN ArrayList.
+
+class Name 2-SlotData
+	This Class is Use Get The Slot Data From Database And Data Store In Collection.
+	This Class Method Are	
+	a.getSlotDetails()-This Method Is Use To Get Slot Data From ResultSet And Store IN TreeMap.
+/********************************************************************************/
+C.Com.opration Package
+Interface Name-Opration
+	This Class Method Are 
+	a.insert(String number,String color)
+	b.Remove(int number)
+
+class Name 1-InsertOpration
+	This Class is Use Insert The Data From DataBase.
+	This Class Method Are 
+	a.insert(String number,String color)-This Method Is Use To Insert The Data.
+	
+class Name 1-RemoveOpration
+	This Class is Use Remove The Data From DataBase.
+	This Class Method Are
+	a.Remove(int number)-This Method Is Use To Remove The Data.
+/********************************************************************************/
+D.Com.object.file
+Abstract Class Name-DataOpration
+	This Class Method Are
+	public abstract Data getData(String s);
+	public abstract Opration getOpration(String s);
+
+class Name 1-DataClass
+	This Class is Use To Create Object of Data.
+	This Class Method is getData(String s)
+
+class Name 2-DataClass
+	This Class is Use To Create Object of Opration .
+	This Class Method is getOpration(String s) 
+
+class Name 3-MainObject
+	This Class is Use To Create Object of MainObject .
+	This Class Method is getOpration(String s) 
+/********************************************************************************/
+E.Com.servlet.file Package
+class Name 1-EnterCarServlet
+	This Class is Get Data From EnterCar.html And Send To The Operation.java.
+	This Class Method is doPost();
+
+class Name 2-ExitCarServlet
+	This Class is Get Data From ExitCar.html And Send To The Operation.java.
+	This Class Method is doPost();
+
+class Name 3-ByColor
+	This Class is Get Data From ByColor.html And Display Data In Table.
+	This Class Method is doPost();
+
+class Name 4-BySlot
+	This Class is Get Data From BySlot.html And Display Data In Table.
+	This Class Method is doPost();
+
+class Name 5-Current
+	This Class is  Display The Current Parking Data In Table.
+	This Class Method is doPost();
+
+class Name 6-History
+	This Class is  Display The Old Parking Data In Table.
+	This Class Method is doPost();
+
+class Name 7-AllData
+	This Class is  Display The All Parking Data In Table.
+	This Class Method is doPost();
+/********************************************************************************/
+2.WebContent Package
+ A.WEB-INF
+Html Name 1-index
+	This html is  Display Home Page.
+Html Name 2-EnterCar
+	This html is  Get Car No And Color Send to EnterCar.java.
+Html Name 3-ExitCar
+	This html is  Get Slot NO Send to ExitCar.java.
+Html Name 4-Bycolor
+	This html is  Get Color And Color Send to Bycolor.java.
+Html Name 5-BySlot
+	This html is  Get Slot No And Color Send to BySlot.java.
+/********************************************************************************/
