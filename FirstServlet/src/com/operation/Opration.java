@@ -1,4 +1,4 @@
-package com.operation.classs;
+package com.operation;
 
 public interface Opration {
 	public int insert(String number,String color);

@@ -3,7 +3,7 @@ package com.object.file;
 import com.data.file.CarData;
 import com.data.file.Data;
 import com.data.file.SlotData;
-import com.operation.classs.Opration;
+import com.operation.Opration;
 
 public class DataClass  extends DataOpration{
 	Data d = null;

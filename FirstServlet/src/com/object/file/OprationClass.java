@@ -3,9 +3,9 @@ package com.object.file;
 import com.data.file.CarData;
 import com.data.file.Data;
 import com.data.file.SlotData;
-import com.operation.classs.InsertOpration;
-import com.operation.classs.Opration;
-import com.operation.classs.RemoveOperation;
+import com.operation.InsertOpration;
+import com.operation.Opration;
+import com.operation.RemoveOperation;
 
 public class OprationClass extends DataOpration{
 Opration o=null;
