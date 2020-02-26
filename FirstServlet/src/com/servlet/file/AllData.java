@@ -47,17 +47,18 @@ public class AllData extends HttpServlet {
 		PrintWriter pw1 = response.getWriter();
 	
 	
-		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Car Details "+ " </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
-		
+		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>All Car Details</h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
+
 		for(int i=0;i<c.size();i++)
 		{
-		
+			
 		pw1.write("<tr><td>"+c.get(i).regNumber+"</td><td>"+c.get(i).color+"</td><td>"+c.get(i).slot+"</td></tr>");
 			
 			
 			}
-		pw.write("</table>");
+		pw.write("</table><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
 	
+		c.removeAll(c);
 	}
 
 }

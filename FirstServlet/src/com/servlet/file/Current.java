@@ -14,16 +14,16 @@ import com.data.file.GetData;
 import com.user.classs.CarDetails;
 
 /**
- * Servlet implementation class ByColor
+ * Servlet implementation class Current
  */
-@WebServlet("/ByColor")
-public class ByColor extends HttpServlet {
+@WebServlet("/Current")
+public class Current extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ByColor() {
+    public Current() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class ByColor extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -42,30 +42,28 @@ public class ByColor extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		ArrayList<CarDetails> al=GetData.getCarDetails();
+		ArrayList<CarDetails> c=GetData.getCarDetails();
 		PrintWriter pw = response.getWriter();
 		PrintWriter pw1 = response.getWriter();
-		String s=request.getParameter("color1");
 	
-		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Car Details BY Color "+s+""
-				+ " </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
+	
+		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Available Car Details </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
 		boolean flag=false;
-		for(CarDetails c:al)
+		for(int i=0;i<c.size();i++)
 		{
-			if(c.color.equalsIgnoreCase(s)){
+			if(c.get(i).Status.equalsIgnoreCase("IN")){
 				flag=true;
-				pw1.write("<tr><td>"+c.regNumber+"</td><td>"+c.color+"</td><td>"+c.slot+"</td></tr>");
+		pw1.write("<tr><td>"+c.get(i).regNumber+"</td><td>"+c.get(i).color+"</td><td>"+c.get(i).slot+"</td></tr>");
 			
 			}
-			
 			}
-		al.removeAll(al);
-			pw.write("</table><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
-				if(flag==false)
-				{
-					pw.write("<h4 style='text-align:center'>NO RECORD FOUND</h4>");
-				}
-				al.removeAll(al);
+		pw.write("</table><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
+		if(flag==false)
+		{
+			pw.write("<h4 style='text-align:center'>NO RECORD FOUND</h4>");
+		}
+		c.removeAll(c);
+	
 	}
 
 }

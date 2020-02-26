@@ -59,10 +59,11 @@ public class BySlot extends HttpServlet {
 			}
 			
 			}
-		pw.write("</table>");
+		pw.write("</table> <br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
 		if(flag==false){
 			pw.write("<h4 style='text-align:center'>NO RECORD FOUND</h4>");
 		}
+		al.removeAll(al);
 	}
 
 }
