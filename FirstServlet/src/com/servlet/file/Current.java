@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.data.file.GetData;
+import com.data.file.Data;
+
+import com.object.file.DataOpration;
+import com.object.file.MainObject;
 import com.user.classs.CarDetails;
 
 /**
@@ -42,21 +45,24 @@ public class Current extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		ArrayList<CarDetails> c=GetData.getCarDetails();
+		DataOpration od=MainObject.getObject("data");
+		Data dd=od.getData("cardata");
+		ArrayList<CarDetails> c=dd.getCarDetails();
 		PrintWriter pw = response.getWriter();
 		PrintWriter pw1 = response.getWriter();
 	
 	
-		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Available Car Details </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Slot</th><tr>");
+		pw.write("<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Available Car Details </h3><table border='2'><tr><th>Registration No</th><th>Color</th><th>Status</th><th>Slot</th><tr>");
 		boolean flag=false;
 		for(int i=0;i<c.size();i++)
 		{
-			if(c.get(i).Status.equalsIgnoreCase("IN")){
+			if(c.get(i).Status.equalsIgnoreCase("IN"))
+			{
 				flag=true;
-		pw1.write("<tr><td>"+c.get(i).regNumber+"</td><td>"+c.get(i).color+"</td><td>"+c.get(i).slot+"</td></tr>");
+				pw1.write("<tr><td>"+c.get(i).regNumber+"</td><td>"+c.get(i).color+"</td><td>"+c.get(i).Status+"</td><td>"+c.get(i).slot+"</td></tr>");
 			
 			}
-			}
+		}
 		pw.write("</table><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
 		if(flag==false)
 		{

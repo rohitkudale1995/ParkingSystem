@@ -3,24 +3,20 @@ package com.operation.classs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.TreeMap;
 
 import com.connection.file.ConnectionClass;
-import com.data.file.GetData;
-import com.user.classs.CarDetails;
 
-public class Operation {
+public class InsertOpration implements  Opration{
 	static Connection con=null;
 	static ResultSet rs=null;
-	static PreparedStatement st=null;
-	
+	static PreparedStatement st=null;	
 	static int result=0;
-	
-	public static int insert(String number,String color){
+	public int insert(String number, String color) {
+		// TODO Auto-generated method stub
+		if(number!=null && color!=null)
+		{
 		try {
 			 con=ConnectionClass.connetionObj().connect();
 			 st=con.prepareStatement("select min(sno) as no from Slot where place='NO'");
@@ -85,6 +81,12 @@ public class Operation {
 			{
 			
 				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
 			}
 	
 		try{
@@ -111,67 +113,13 @@ public class Operation {
 		e.printStackTrace();
 		
 		}
-		
+	}
 		return result;
 	
 	}
-	
-	public static int Remove(int number){
-		try {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-			LocalDateTime now = LocalDateTime.now();  
-			String temp=dtf.format(now);
-			con=null;
-			rs=null;
-			st=null;
-			con=ConnectionClass.connetionObj().connect();
-			st=con.prepareStatement("update cardata set outTime=?,cStatus=? where slot=? and cstatus=?");
-			st.setString(1,temp);
-			st.setString(2,"OUT");
-			st.setInt(3, number);
-			st.setString(4,"IN");
-			st.executeUpdate();
-			} 
-			catch (Exception e) 
-			{
-			
-			e.printStackTrace();
-			
-			}
-		try {
-		
-			con=null;
-			rs=null;
-			st=null;
-			con=ConnectionClass.connetionObj().connect();
-			st=con.prepareStatement("select * from slot");
-		
-			st.execute();
-			} 
-			catch (Exception e) 
-			{
-			
-			e.printStackTrace();
-			
-			}
-		
-		try {
-		
-			con=null;
-			rs=null;
-			st=null;
-			con=ConnectionClass.connetionObj().connect();
-			st=con.prepareStatement("update slot set place='NO' where sno=? and place='Yes'");
-	
-			st.setInt(1, number);
-			st.executeUpdate();
-			} 
-			catch (Exception e) 
-			{
-			
-			e.printStackTrace();
-			
-			}
+
+	public int Remove(int number) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.connection.file.ConnectionClass;
-import com.data.file.GetData;
-import com.operation.classs.Operation;
+
+import com.object.file.DataOpration;
+import com.object.file.MainObject;
+
+import com.operation.classs.Opration;
 
 @WebServlet("/EnterCarServlet")
 public class EnterCarServlet extends HttpServlet {
@@ -40,11 +43,12 @@ public class EnterCarServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		DataOpration od=MainObject.getObject("opration");
+		Opration op=od.getOpration("insertdata");
 		PrintWriter pw = response.getWriter();
 		String s = request.getParameter("color1");
 		String s1 = request.getParameter("number");
-	int slott=Operation.insert(s1, s);
+		int slott=op.insert(s1, s);
 		pw.write(
 				"<h1 style='text-align:center'>Parking System</h1><div  align='center' >"
 				+ "<h3>Entery Car Details</h3> <div><label for='number'>Registration Numbers:-</label>&nbsp;"

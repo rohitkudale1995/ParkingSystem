@@ -15,8 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.data.file.GetData;
-import com.operation.classs.Operation;
+import com.data.file.Data;
+
+import com.object.file.DataOpration;
+import com.object.file.MainObject;
+
+import com.operation.classs.Opration;
 import com.user.classs.CarDetails;
 
 /**
@@ -48,11 +52,14 @@ public class ExitCarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
+		DataOpration od=MainObject.getObject("opration");
+		Opration op=od.getOpration("removedata");
+		DataOpration o=MainObject.getObject("Data");
+		Data cd=o.getData("slotdata");
 		PrintWriter pw=response.getWriter();
 		String s=request.getParameter("slot");
 		int temp=Integer.parseInt(s);
-		TreeMap<Integer,String> tm=GetData.getSlotDetails();
+		TreeMap<Integer,String> tm=cd.getSlotDetails();
 		Set se=tm.entrySet();
 		Iterator it=se.iterator();
 		boolean	flag=false;
@@ -71,15 +78,15 @@ public class ExitCarServlet extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter pw1=response.getWriter();
 			pw.println("<script type=\"text/javascript\">");
-			pw.println("alert('Invalid Username or Password');");
+			pw.println("alert('Invalid Slot');");
 			pw.println("</script>");
 			RequestDispatcher rd=request.getRequestDispatcher("ExitCar.html");
 			rd.include(request, response); 
 		}
 		else
 		{
-			Operation.Remove(temp);
-		pw.write( "<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Entery Car Details</h3> <div>"
+			op.Remove(temp);
+			pw.write( "<h1 style='text-align:center'>Parking System</h1><div  align='center' ><h3>Entery Car Details</h3> <div>"
 				+ " <label>Parking Slot Is Empty:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				+ "<input type='text' id='number'value='"+s+"' disabled></div><br><br><button> <a href='index.html'  role='button' style='text-align:center' >Submit</a></button>");
 		}
